@@ -3,3 +3,6 @@ openai
 langchain-community
 pydantic==1.10.8
 langchain_openai
+boto3
+fastapi
+mangum
