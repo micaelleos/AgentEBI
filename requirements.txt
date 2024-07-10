@@ -6,3 +6,6 @@ langchain_openai
 boto3
 fastapi
 mangum
+typing
+pydantic
+uvicorn

@@ -54,8 +54,8 @@ class EBIagent:
             agent_scratchpad= lambda x: format_to_openai_functions(x["intermediate_steps"])
         ) | self.prompt | self.model_with_tool | OpenAIFunctionsAgentOutputParser()
 
-        self.agent_executor= AgentExecutor(agent=self.agent_chain, tools=[self.exibir_ebi], verbose=True, memory=self.memory)
+        self.agent_executor= AgentExecutor(agent=self.agent_chain, tools=[self.exibir_ebi], verbose=True, memory=self.memory,handle_parsing_errors=True)
 
-        def chat_agent(self,query):
-            response=self.agent_executor.invoke({'input':{query}})
-            return response
+    def chat_agent(self,query):    
+        response=self.agent_executor.invoke({'input':query})
+        return response
