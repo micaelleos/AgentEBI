@@ -5,7 +5,7 @@ login:
 docker:
 	docker build -t awsservices .
 tag:
-	docker tag awsservices:latest 478259563916.dkr.ecr.us-east-1.amazonaws.com/awsservices:latest
+	docker tag awsservices:agentebi 478259563916.dkr.ecr.us-east-1.amazonaws.com/awsservices:agentebi
 push: 
-	docker push 478259563916.dkr.ecr.us-east-1.amazonaws.com/awsservices:latest
+	docker push 478259563916.dkr.ecr.us-east-1.amazonaws.com/awsservices:agentebi
 run: login docker tag push
