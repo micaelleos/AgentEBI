@@ -9,7 +9,7 @@ def get_ebi(session_id):
         response = table.scan(
             FilterExpression=Key('SessionId').eq(session_id)
         )
-        return response["Items"]
+        return response["Items"][0]
     except:
         return ""
     

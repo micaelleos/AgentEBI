@@ -20,6 +20,7 @@ from langchain.memory.chat_message_histories import DynamoDBChatMessageHistory
 
 from src.tool import generate_tools_for_user
 
+
 class EBIagent:
     def __init__(self,session_id):
 
@@ -59,3 +60,17 @@ class EBIagent:
     def chat_agent(self,query):    
         response=self.agent_executor.invoke({'input':query})
         return response
+    
+    def chat_agent_stream(self,query):
+        """ strem agent chain (steps,actions,toolcalls and output)"""
+        response=self.agent_executor.stream({'input':query})
+        return response
+    
+if __name__=="__main__":
+    import time
+    chat = EBIagent(session_id="53")
+    response = chat.chat_agent_stream(query="olá como você pode me ajudar?quero uma descrição completa")
+
+    for i in response:
+        print(i)
+        time.sleep(10)

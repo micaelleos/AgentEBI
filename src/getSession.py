@@ -1,4 +1,5 @@
 import boto3
+from src.getEBI import get_ebi
 
 # Get the service resource.
 dynamodb = boto3.resource('dynamodb')
@@ -17,8 +18,17 @@ def get_all_keys():
         data.extend(response['Items'])
 
     for item in data:
-        keys.append({
-            partition_key_name: item[partition_key_name]
-        })
+        keys.append(item[partition_key_name])
 
-    return keys
+    list_key_titles = []
+    for key in keys:
+        ebi = get_ebi(key)
+        if isinstance(ebi,dict):
+            list_key_titles.append({partition_key_name:key,"title":ebi["title"]})
+        else:
+            list_key_titles.append({partition_key_name:key,"title":None})
+        
+    return list_key_titles
+
+if __name__=="__main__":
+    print(get_all_keys())
